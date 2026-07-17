@@ -29,4 +29,6 @@ $pip install -r requirements.txt
 
 # Updates
 
-Using venv with Python 3.10, updated requirements.txt with minimal runtime set
+Use venv with Python 3.10
+Updated requirements.txt with minimal runtime set
+Qt and ROS are NOT needed.
