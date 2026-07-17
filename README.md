@@ -27,4 +27,6 @@ Tool ID, Timestamp, Frame #, data columns, Tracking Quality
 
 $pip install -r requirements.txt
 
+# Updates
 
+Using venv with Python 3.10, updated requirements.txt with minimal runtime set
