@@ -18,14 +18,15 @@ now=datetime.now()
 #Converts to dd-mm-YY_H-M-S
 dt_string=now.strftime("%d-%m-%Y_%H-%M-%S")
 #Data files will be saved as customname_{dt_string}
-CSV_FILEPATH="../ParticipantData" #Default Name
+CSV_FILEPATH="..\data" #Default Name
 CSV_FILEPATH=CSV_FILEPATH+dt_string+".csv"
 
-ROM_FILEPATH="../resources/ecm.rom" #Default .rom filepath
+ROM_FILEPATH="code/resources/tooltip_marker.rom" #Default .rom filepath
 
 USE_QUATERNIONS=True #Using quaternions by default
 SAMPLE_RATE=30 #Sampling rate for NDI frames
 
+NDI_PORT = "COM4" # Change NDI port here
 SAMPLE_PERIOD=int(round((1/30)*1000))
 TRACKING=False
 
@@ -117,7 +118,8 @@ def start_recording():
     global tracker
     settings={
                 "tracker type": "polaris",
-                "romfiles": [ROM_FILEPATH]
+                "romfiles": [ROM_FILEPATH],
+                "serial port": NDI_PORT,
             }
     tracker=NDITracker(settings) #Sets the NDITracker object
     tracker.use_quaternions=USE_QUATERNIONS #API will record data (in "tracking") as quaternions
