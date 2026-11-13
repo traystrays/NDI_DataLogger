@@ -161,3 +161,4 @@ cython_debug/
 
 # venv ignore
 .venv-3.10
+.venv

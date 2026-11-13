@@ -19,7 +19,7 @@ now=datetime.now()
 #Converts to dd-mm-YY_H-M-S
 dt_string=now.strftime("%d-%m-%Y_%H-%M-%S")
 #Data files will be saved as customname_{dt_string}
-CSV_FILEPATH="../ParticipantData" #Default Name
+CSV_FILEPATH="..\data" #Default Name
 CSV_FILEPATH=CSV_FILEPATH+dt_string+".csv"
 
 ROM_FILEPATH="../resources/tooltip_marker.rom" #Default .rom filepath
@@ -27,6 +27,7 @@ ROM_FILEPATH="../resources/tooltip_marker.rom" #Default .rom filepath
 USE_QUATERNIONS=True #Using quaternions by default
 SAMPLE_RATE=30 #Sampling rate for NDI frames
 
+NDI_PORT = "COM4" # Change NDI port here
 SAMPLE_PERIOD=int(round((1/30)*1000))
 TRACKING=False
 
