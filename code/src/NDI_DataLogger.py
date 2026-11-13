@@ -1,11 +1,12 @@
 '''
 Description: Code for an NDI data logger GUI. Reads in tool(s) pose in quaternion or rotation/translation and timestamps.
 Author: Alexandre Banks (Modified by Randy Moore)
-Date: April 08, 2024
+Date: July 20, 2026
 '''
 #----------------------<Module Imports>------------------------
 from tabnanny import check
 from sksurgerynditracker.nditracker import NDITracker
+from sksurgerynditracker.serial_utils.com_ports import fix_com_port_greater_than_9
 import time
 import csv
 from datetime import datetime #Module used to store system datetime
@@ -21,13 +22,15 @@ dt_string=now.strftime("%d-%m-%Y_%H-%M-%S")
 CSV_FILEPATH="../ParticipantData" #Default Name
 CSV_FILEPATH=CSV_FILEPATH+dt_string+".csv"
 
-ROM_FILEPATH="../resources/ecm.rom" #Default .rom filepath
+ROM_FILEPATH="../resources/tooltip_marker.rom" #Default .rom filepath
 
 USE_QUATERNIONS=True #Using quaternions by default
 SAMPLE_RATE=30 #Sampling rate for NDI frames
 
 SAMPLE_PERIOD=int(round((1/30)*1000))
 TRACKING=False
+
+SERIAL_PORT = "COM11"
 
 #-------------------<Function Definitions>---------------------
 def init_csv():
@@ -115,10 +118,14 @@ def start_recording():
     init_csv()
     global settings
     global tracker
+
     settings={
                 "tracker type": "polaris",
-                "romfiles": [ROM_FILEPATH]
+                "romfiles": [ROM_FILEPATH],
+                # change serial port here
+                "serial port": fix_com_port_greater_than_9(SERIAL_PORT)
             }
+    print("Settings: ",settings)
     tracker=NDITracker(settings) #Sets the NDITracker object
     tracker.use_quaternions=USE_QUATERNIONS #API will record data (in "tracking") as quaternions
                                         #columns 0-2: x,y,z and column 3-6:rotation as a quaternion
